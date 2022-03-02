@@ -9,7 +9,7 @@ import platform
 
 ### CMD-ONLY methods ###
 
-def cls():
+def scr(day):
     """ clear screen, adjusts for platform """
     if platform.system() == 'Windows':
         cmd = 'cls'
@@ -17,6 +17,10 @@ def cls():
         cmd = 'clear' # most other than windows use clear as far as i know
     system(cmd)
 
+    open_msg = "*"*40 + "\n*" + " "*38 + "*\n*  MealTracker  //  Connor Chang, '22  *\n*" + " "*38 + "*\n" + "*"*40 + "\n\n"
+    print(open_msg)
+    print(today)
+    print()
 
 def get_search():
     """ let the user search for and select a food item """
@@ -96,11 +100,6 @@ def get_manual():
 
 if __name__ == '__main__':
 
-    # opening message
-    cls()
-    open_msg = "*"*40 + "\n*" + " "*38 + "*\n*  MealTracker  //  Connor Chang, '22  *\n*" + " "*38 + "*\n" + "*"*40 + "\n\n"
-    print(open_msg)
-
     # access stored log
     log = Log()
     log.load_data('log.dat')
@@ -110,30 +109,34 @@ if __name__ == '__main__':
     else:
         today = Day()
 
-    # display what's already there
-    print(today)
-    print()
+    # opening message
+    scr(today)
 
     # main loop :)
     prompt = "What would you like to do?\n" + "="*30 + "\n[d]isplay\nadd by [s]earch\nadd [m]anually\n[r]emove\n[q]uit\n\n"
     keep_going = ""
 
     while keep_going != "q":
+        scr(today)
         keep_going = input(prompt)
 
         if keep_going == "d":
             #display all the food you eated
+
             print(today)
         elif keep_going == "s":
             #something involving searching
+            scr(today)
             add_to_meal = input("Which meal? " + str(list(today.meals.keys())) + "\n")
             today.meals[add_to_meal].foods.append(get_search())
         elif keep_going == "m":
             #add food manually
+            scr(today)
             add_to_meal = input("Which meal? " + str(list(today.meals.keys())) + "\n")
             today.meals[add_to_meal].foods.append(get_manual())
         elif keep_going == "r":
             #remove a preexisting Food
+            scr(today)
             removal_meal = input("Which meal? " + str(list(today.meals.keys())) + "\n")
             if len(today.meals[removal_meal].foods) > 0:
                 removal_index = int(input(f"Which to remove? [0 - {len(today.meals[removal_meal].foods) - 1}]\n"))
@@ -141,11 +144,9 @@ if __name__ == '__main__':
             else:
                 print("nothing to remove from this meal")
         elif keep_going == "q":
-            print("goodbye ..")
+            print("Goodbye!")
         else:
             print("Invalid input")
-
-        print()
 
     log.add_day(today)
     log.save_data('log.dat')

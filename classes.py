@@ -234,7 +234,7 @@ class Day():
         value = ""
 
         for key in self.meals.keys():
-            value += f"{key}\n{'~'*20}\n{self.meals[key]}"
+            value += f"{key}\n{'~'*50}\n{self.meals[key]}"
 
             if key != list(self.meals.keys())[-1]:
                 # if not last entry, add a newline
@@ -323,7 +323,7 @@ class Log():
         sorted_keys.sort()
 
         for key in sorted_keys:
-            value += f"{key}\n{'='*20}\n{self.days[key]}"
+            value += f"[{key}]\n{'='*60}\n{self.days[key]}"
 
             if key != list(self.days.keys())[-1]:
                 value += "\n"
