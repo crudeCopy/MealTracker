@@ -4,7 +4,7 @@ import requests
 ##############################################
 # REFERS TO A LOCAL FILE HOLDING THE API KEY #
 from config import API_KEY                   #
-key = API_KEY # REPLACE WITH OWN API KEY     #
+key = f"&api_key={API_KEY}" # REPLACE WITH OWN API KEY     #
 ##############################################
 
 page_size = "&pageSize="

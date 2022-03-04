@@ -97,7 +97,7 @@ class Food():
             self.set_fats(result['foodNutrients'][1]['value'])
         except:
             pass
-
+            
         ## calories
         try:
             self.set_carbs(result[which]['foodNutrients'][2]['value'])
