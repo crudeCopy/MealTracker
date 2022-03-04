@@ -40,37 +40,7 @@ def get_search():
     new_food = Food()
 
     ## name
-    new_food.set_name(result[which]['description'])
-
-    ## serving size
-    try:
-        new_food.set_serv(result[which]['servingSize'], result[which]['servingSizeUnit'])
-    except:
-        pass # Food class comes with defaults preset upon default construction
-
-    ## calories
-    try:
-        new_food.set_cals(result[which]['foodNutrients'][3]['value'])
-    except:
-        pass
-
-    ## protein
-    try:
-        new_food.set_prot(result[which]['foodNutrients'][0]['value'])
-    except:
-        pass
-
-    ## calories
-    try:
-        new_food.set_fats(result[which]['foodNutrients'][1]['value'])
-    except:
-        pass
-
-    ## calories
-    try:
-        new_food.set_carbs(result[which]['foodNutrients'][2]['value'])
-    except:
-        pass
+    new_food.map_from_search(result[which])
 
     # return chosen result
     return new_food

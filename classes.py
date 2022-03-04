@@ -70,6 +70,40 @@ class Food():
         self.fats = food_fats
         self.carbs = food_carbs
 
+    # populates a Food with FDC search results
+    def map_from_search(self, result):
+        self.set_name(result['description'])
+
+        ## serving size
+        try:
+            self.set_serv(result['servingSize'], result['servingSizeUnit'])
+        except:
+            pass # Food class comes with defaults preset upon default construction
+
+        ## calories
+        try:
+            self.set_cals(result['foodNutrients'][3]['value'])
+        except:
+            pass
+
+        ## protein
+        try:
+            self.set_prot(result['foodNutrients'][0]['value'])
+        except:
+            pass
+
+        ## calories
+        try:
+            self.set_fats(result['foodNutrients'][1]['value'])
+        except:
+            pass
+
+        ## calories
+        try:
+            self.set_carbs(result[which]['foodNutrients'][2]['value'])
+        except:
+            pass
+
     # basic calculations from given stats
     def cals_from_prot(self):
         return self.prot * 4.1
